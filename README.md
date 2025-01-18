@@ -40,7 +40,7 @@ Trong repo này đang xây dựng quy trình như sau:
 - role: `mariadb`
     - Cài đặt mariaDB ==> Chọn version từ Input. Người dùng Nhập thông tin: Tên DB, user/pass cho MySQL từ Input. 
 - role: `notify`
-    - Gửi thông báo về email cho người dùng về: IP, user, thông tin phiên bản, tk của OS/mariaDB</br>![image1](https://prnt.sc/LTUy2d2e2OOo)
+    - Gửi thông báo về email cho người dùng về: IP, user, thông tin phiên bản, tk của OS/mariaDB</br>![image1](/image/vra_1.png)
 
 
 Phía vRA thực hiện cấu hình blueprint:
@@ -242,5 +242,5 @@ resources:
 
 ```
 
-Khi Deloy sẽ có kết quả như sau:
+Khi Deloy sẽ có kết quả như sau: </br>![image1](/image/vra_2.png)
 
