@@ -1,6 +1,6 @@
 # Ghi chép về vRA
 
-Tạo một máy chủ ảo làm ansible để thực hiện làm tự động hóa trong vRA
+Tạo một máy chủ ảo làm ansible để thực hiện làm tự động hóa trong vRA - [link hướng dẫn](https://www.vcrocs.info/vmware-aria-automation-ansible-integration/)
 
 Cài đặt gói cơ bản để ansible có thể sử dụng được trong VRA trên máy chủ Ansible 
 ```
