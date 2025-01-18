@@ -1,0 +1,8 @@
+
+[database]
+172.16.99.227 ansible_connection=ssh
+
+[database:vars]
+ansible_user=root
+ansible_password='Solus2025!'
+interpreter_python  = /usr/bin/python3

@@ -1,0 +1,5 @@
+- hosts: all
+  roles:
+    - { role: app, become: true }
+    - { role: mariadb, become: true }
+    - { role: notify, become: true }

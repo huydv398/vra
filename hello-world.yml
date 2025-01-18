@@ -1,0 +1,7 @@
+- name: Echo hello
+  hosts: all
+  connection: ssh
+  become: no
+  tasks:
+    - name: "Echo hello string"
+      shell: echo "Hello-world" >> /root/echo.txt

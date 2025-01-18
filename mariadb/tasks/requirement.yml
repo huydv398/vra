@@ -1,0 +1,20 @@
+- name: "rm file lock"
+  shell: |
+    rm /var/lib/dpkg/lock
+    rm /var/lib/dpkg/lock-frontend
+    rm /var/lib/apt/lists/lock
+    rm /var/cache/apt/archives/lock
+- name: " dpkg --configure -a"
+  shell: dpkg --configure -a
+
+- name: update
+  apt: update_cache=yes   
+  ignore_errors: yes   
+- name: install pip3
+  apt: name=python3-pip state=present 
+
+- name: Make sure pymysql is present
+  become: true # needed if the other tasks are not played as root
+  pip:
+    name: pymysql
+    state: present

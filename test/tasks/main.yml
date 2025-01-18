@@ -1,0 +1,5 @@
+---
+# tasks file for test
+
+- name: "Echo hello string"
+  shell: echo "{{ resource_name }}" >> /root/echo.txt

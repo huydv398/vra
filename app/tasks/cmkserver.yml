@@ -1,0 +1,41 @@
+- name: Show Chrony synchronization status
+  debug:
+    msg: "Name: {{ ansible_hostname }}, IP {{ ansible_host }}"
+  # delegate_to: localhost
+- name: Add client host 
+  checkmk.general.host:
+    server_url: "http://172.16.99.125/"
+    site: mon
+    automation_user: "automation"
+    automation_secret: "OBKJKAHJPIRDIR@CEHVM"
+    name: "{{ resource_name  }}"
+    attributes:
+      alias: "{{ ansible_hostname  }}"
+      ipaddress: "{{ ansible_host }}"
+      tag_agent: "cmk-agent"
+    folder: ""
+    state: "present"
+  # delegate_to: localhost
+
+- name: "Add newly discovered services, update labels and remove vanished services on host."
+  checkmk.general.discovery:
+    server_url: "http://172.16.99.125/"
+    site: mon
+    automation_user: "automation"
+    automation_secret: "OBKJKAHJPIRDIR@CEHVM"
+    host_name: "{{ resource_name  }}"
+    state: "tabula_rasa"
+    bulk_size: 3
+  # delegate_to: localhost
+
+- name: Activate all changes HERE
+  checkmk.general.activation:
+    server_url: "http://172.16.99.125/"
+    site: mon
+    automation_user: "automation"
+    automation_secret: "OBKJKAHJPIRDIR@CEHVM"
+    force_foreign_changes: 'true'
+  run_once: 'true'
+  # delegate_to: localhost
+
+#  ansible-playbook /root/ansible-khoapa/2.checkmk-add-host-copy.yml -i /root/do/1.inventory.yaml

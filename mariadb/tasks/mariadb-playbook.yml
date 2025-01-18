@@ -1,0 +1,38 @@
+# - name: Install MariaDB repository 10.3
+#   apt_repository: repo='deb [arch=amd64] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu/ {{}} main' state=present
+
+# - name: Add repository key to the system
+#   apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=0xF1656F24C74CD1D8
+
+# - name: update
+#   apt: update_cache=yes   
+#   ignore_errors: yes      
+- name: Download the MariaDB repo setup script
+  ansible.builtin.get_url:
+    url: https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+    dest: /tmp/mariadb_repo_setup
+    mode: '0755'
+
+- name: Run MariaDB repo setup with version 10.6
+  ansible.builtin.shell: |
+    bash /tmp/mariadb_repo_setup --mariadb-server-version={{ db_ver }}
+  args:
+    chdir: /tmp/
+
+- name: Install MariaDB Server "{{ db_ver }}"
+  apt: name=mariadb-server state=latest
+  
+- name: Install MariaDB Client "{{ db_ver }}"
+  apt: name=mariadb-client state=latest
+
+- name: Restart MariaDB "{{ db_ver }}"
+  service: name=mysql state=restarted
+
+- name: Create a new database with name from Input
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+# - name: Restart MariaDB "{{ db_ver }}"
+#   debug:
+#     msg: "{{ db_ver }}"

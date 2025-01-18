@@ -1,0 +1,29 @@
+- name: Removes all anonymous user accounts
+  mysql_user:
+    login_unix_socket: /run/mysqld/mysqld.sock
+    name: ''
+    host_all: true
+    state: absent
+- name: create random but idempotent password
+  ansible.builtin.set_fact:
+    password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+  register: passwordsql
+- name: print password
+  debug:
+    msg: "{{ passwordsql.ansible_facts.password }}"
+# - name: Create database user with name 'sqladmin' and password '12345' with all database privileges
+#   mysql_user:
+#     login_unix_socket: /run/mysqld/mysqld.sock
+#     name: "{{ db_user }}"
+#     priv: '*.*:ALL,GRANT'
+#     state: present
+#     password: "{{ passwordsql.ansible_facts.password }}"
+#     state: present
+- name: Create database user with name /password from input with database_name input privileges
+  mysql_user:
+    login_unix_socket: /run/mysqld/mysqld.sock
+    name: "{{ db_user }}"
+    priv: '{{ db_name }}.*:ALL,GRANT'
+    state: present
+    password: "{{ db_pass }}"
+    state: present

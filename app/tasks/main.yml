@@ -1,0 +1,5 @@
+---
+# tasks file for app
+# - ansible.builtin.import_tasks: checkmk.yml
+- ansible.builtin.import_tasks: cmkserver.yml
+- ansible.builtin.import_tasks: syslog.yml

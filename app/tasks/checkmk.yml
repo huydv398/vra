@@ -1,0 +1,22 @@
+- name: Check if Checkmk agent is installed
+  command: check_mk_agent | head
+  register: checkmk_output
+  ignore_errors: true
+
+- name: end playbook if installed
+  meta: end_play
+  when: checkmk_output.rc == 0
+  # ignore_errors: true
+
+- name: Print Checkmk agent status
+  debug:
+    msg: "Checkmk agent is {{ 'installed' if checkmk_output.rc == 1 else 'not installed' }}"
+
+- name: download agent checkmk if Ubuntu
+  get_url:
+    url: http://172.16.99.125/mon/check_mk/agents/check-mk-agent_2.3.0p23-1_all.deb
+    dest: /tmp/check-mk-agent_2.3.0p23-1_all.deb
+
+- name: install package if ubuntu
+  shell: sudo dpkg -i /tmp/check-mk-agent_2.3.0p23-1_all.deb
+  ignore_errors: true

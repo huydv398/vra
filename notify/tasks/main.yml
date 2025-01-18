@@ -1,0 +1,44 @@
+---
+# tasks file for notify
+- ansible.builtin.import_tasks: get_info.yml
+
+
+#tasks for mail
+- name: Include vars of /root/notify/vars/main.yml
+  include_vars: 
+    dir: /opt/notify/vars
+  delegate_to: localhost
+- name: Generate VM inventory report(html)
+  template:
+    src: /opt/notify/templates/report.j2
+    dest: /opt/notify/templates/report.html
+  delegate_to: localhost
+# task for mail
+- name: Sending an e-mail using Gmail SMTP servers
+  community.general.mail:
+    host: "{{ mail_host }}"
+    from: "{{ mail_username }}"
+    port: "{{ mail_port }}"
+    username: "{{ mail_username }}"
+    password: "{{ mail_password }}"
+    subtype: html
+    to: "{{ user_to }}"
+    subject: Ansible-report
+    body: "{{ lookup('file', '/opt/notify/templates/report.html') }}"
+  delegate_to: localhost
+
+#task for tele
+# - name: Add host to Checkmk server
+#   hosts: localhost
+#   gather_facts: no
+
+#   tasks:
+#   - name: Send notify to Telegram
+#     community.general.telegram:
+#       token: "7662474940:AAGHkXnNjIvQ6BAYjDtdgL8RO99nAuO9iMY"
+#       api_args:
+#         chat_id: "750878537"
+#         parse_mode: "markdown"
+#         text: "Test msg to tele: `msg ok`"
+#         disable_web_page_preview: true
+#         disable_notification: true

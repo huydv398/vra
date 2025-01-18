@@ -1,0 +1,9 @@
+- name: Add a line to a file /etc/rsyslog.d/50-default.conf
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.d/50-default.conf
+    line: "*.*  @{{ Log_srv }};RSYSLOG_SyslogProtocol23Format"
+
+- name: Restart service rsyslog
+  ansible.builtin.service:
+    name: rsyslog
+    state: restarted

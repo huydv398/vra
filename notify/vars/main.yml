@@ -1,0 +1,11 @@
+---
+# vars file for notify
+api_token: '7662474940:AAGHkXnNjIvQ6BAYjDtdgL8RO99nAuO9iMY'
+chat_ID: '750878537'
+
+mail_host: mail.suncloud.vn
+mail_port: 587
+mail_username: huydv1@suncloud.vn
+mail_password: Duonghuy@2023
+user_to: #khai báo các địa chi cần gửi thông tin đến
+  - huydv@suncloud.vn

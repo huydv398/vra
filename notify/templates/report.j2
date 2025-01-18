@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Infomation VM</title>
+  <style>
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th> <!-- Empty top-left cell -->
+        <th>IP</th>
+        <th>Project Name</th>
+        <th>OS Ver</th>
+        <th>OS-User/Passwd</th>
+        <th>Database Ver</th>
+        <th>MySQL-Info</th>
+        <th>Log Server</th>
+        <th>RequestedAt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>{{ hostname }}</th>
+        <td>{{ IP }}</td>
+        <td>{{ projectName }}</td>
+        <td>{{ ansible_distribution }}-{{ ansible_distribution_version}}</td>
+        <td>{{ os_user }}/{{ os_pass }}</td>
+        <td>{{ db_ver }}</td>
+        <td>Database Name: {{ db_name }}<br>MySQL User: {{ db_user }}<br>MySQL Password: {{ db_pass }} </td>
+        <td>{{ Log_srv }}</td>
+        <td>{{ RequestedAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

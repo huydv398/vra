@@ -1,0 +1,14 @@
+- hosts: database
+  vars:
+    IP: 1.2.3.4
+    projectName: huydv3-pj
+    os_user: huydv123
+    os_pass: Duonghuy2222
+    Log_srv: 172.16.99.207:12514
+    db_ver: '10.6'
+    resource_name: '123'
+    hostname: "1232432"
+  roles:
+    # - { role: mariadb, become: true }
+    # - { role: notify, become: true }
+    - { role: app, become: true }

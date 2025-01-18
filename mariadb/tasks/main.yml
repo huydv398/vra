@@ -1,0 +1,4 @@
+---
+- ansible.builtin.import_tasks: requirement.yml
+- ansible.builtin.import_tasks: mariadb-playbook.yml
+- ansible.builtin.import_tasks: create-user.yml
