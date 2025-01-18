@@ -241,6 +241,7 @@ resources:
         db_user: ${input.db_user}
 
 ```
+Lưu ý: Cần sửa lại nội dung của thông báo tại file: `~/vra/notify/vars/main.yml`</br>![image1](/image/vra_3.png)
 
 Khi Deloy sẽ có kết quả như sau: </br>![image1](/image/vra_2.png)
 
